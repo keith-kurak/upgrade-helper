@@ -11,7 +11,6 @@ import {
 } from '../../utils'
 import UpgradeSupportAlert from './UpgradeSupportAlert'
 import UsefulLinks from './UsefulLinks'
-import AlignDepsAlert from './AlignDepsAlert'
 
 import { PACKAGE_NAMES } from '../../constants'
 
