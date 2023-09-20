@@ -76,6 +76,7 @@ const Settings = ({
               onChange={(e) => setNewPackageName(e.target.value)}
             >
               <PackagesGroupContainer>
+                <Radio value={PACKAGE_NAMES.EXPO}>expo</Radio>
                 <Radio value={PACKAGE_NAMES.RN}>react-native</Radio>
                 <Radio value={PACKAGE_NAMES.RNW}>
                   <Radio.Group

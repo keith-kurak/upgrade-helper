@@ -6,7 +6,7 @@ import ReactGA from 'react-ga'
 import VersionSelector from '../common/VersionSelector'
 import DiffViewer from '../common/DiffViewer'
 import Settings from '../common/Settings'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo-type-a.svg'
 import { SHOW_LATEST_RCS } from '../../utils'
 import { useGetLanguageFromURL } from '../../hooks/get-language-from-url'
 import { useGetPackageNameFromURL } from '../../hooks/get-package-name-from-url'
@@ -188,11 +188,11 @@ const Home = () => {
           <TitleContainer>
             <LogoImg
               alt="React Native Upgrade Helper logo"
-              title="React Native Upgrade Helper logo"
+              title="Expo Bare Upgrade Helper logo"
               src={logo}
             />
             <a href={homepageUrl}>
-              <TitleHeader>React Native Upgrade Helper</TitleHeader>
+              <TitleHeader>Expo Bare Project Upgrade Helper</TitleHeader>
             </a>
           </TitleContainer>
 
@@ -254,8 +254,8 @@ const Home = () => {
         />
       </Container>
       {/*
-        Pass empty values for app name and package if they're the defaults to 
-        hint to diffing components they don't need to further patch the 
+        Pass empty values for app name and package if they're the defaults to
+        hint to diffing components they don't need to further patch the
         rn-diff-purge output.
       */}
       <DiffViewer

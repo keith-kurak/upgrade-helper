@@ -211,8 +211,6 @@ class UsefulContentSection extends Component {
               <UsefulLinks packageName={packageName} versions={versions} />
             ) : null}
 
-            <AlignDepsAlert />
-
             <Separator />
 
             <UpgradeSupportAlert />
