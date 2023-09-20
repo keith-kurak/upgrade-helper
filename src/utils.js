@@ -14,7 +14,7 @@ const getRNDiffRepository = ({ packageName }) =>
 export const getReleasesFileURL = ({ packageName }) =>
   `https://raw.githubusercontent.com/${getRNDiffRepository({
     packageName,
-  })}/master/${packageName === PACKAGE_NAMES.RNM ? 'RELEASES_MAC' : 'RELEASES'}`
+  })}/main/${packageName === PACKAGE_NAMES.RNM ? 'RELEASES_MAC' : 'RELEASES'}`
 
 export const getDiffURL = ({
   packageName,
