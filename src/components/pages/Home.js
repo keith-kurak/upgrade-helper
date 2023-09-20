@@ -188,7 +188,7 @@ const Home = () => {
           <TitleContainer>
             <LogoImg
               alt="React Native Upgrade Helper logo"
-              title="Expo Bare Upgrade Helper logo"
+              title="Expo Bare Upgrade Helper  logo"
               src={logo}
             />
             <a href={homepageUrl}>
