@@ -50,6 +50,15 @@ const DiffSection = ({
       )}
 
       {diff.map((diffFile) => {
+        // debugging code to try to figure out why duplicate iOS icon asset file delete records are showing up
+        // could this be a consequence of trying to upgrade existing diffs?
+        /*if (
+          `${diffFile.oldRevision}${diffFile.newRevision}` ===
+          'ff9d54105a61b538281bd51e5fbfce5148dc24ba0000000000000000000000000000000000000000'
+        ) {
+          console.log(diffFile)
+        }*/
+
         const diffKey = getDiffKey(diffFile)
         const isDiffCompleted = completedDiffs.includes(diffKey)
 
