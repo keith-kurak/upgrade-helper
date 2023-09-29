@@ -69,12 +69,12 @@ const stripAnchorInUrl = () => {
   return true
 }
 
-const compareReleaseCandidateVersions = ({ version, versionToCompare }) =>
+/*const compareReleaseCandidateVersions = ({ version, versionToCompare }) =>
   ['prerelease', 'prepatch', null].includes(
     semver.diff(version, versionToCompare)
-  )
+  )*/
 
-const getLatestMajorReleaseVersion = (releasedVersions) =>
+/*const getLatestMajorReleaseVersion = (releasedVersions) =>
   semver.valid(
     semver.coerce(
       releasedVersions.find(
@@ -83,15 +83,15 @@ const getLatestMajorReleaseVersion = (releasedVersions) =>
           semver.patch(releasedVersion) === 0
       )
     )
-  )
+  )*/
 
 // Check if `from` rc version is one of the latest major release (ie. 0.60.0)
-const checkIfVersionIsALatestRC = ({ version, latestVersion }) =>
+/*const checkIfVersionIsALatestRC = ({ version, latestVersion }) =>
   semver.prerelease(version) &&
   compareReleaseCandidateVersions({
     version: latestVersion,
     versionToCompare: version,
-  })
+  })*/
 
 // Filters out release candidates from `releasedVersion` with the
 // exception of the release candidates from the latest version
@@ -101,10 +101,12 @@ const getReleasedVersionsWithCandidates = ({
   latestVersion,
   showReleaseCandidates,
 }) => {
-  const isToVersionAReleaseCandidate = semver.prerelease(toVersion) !== null
-  const isLatestAReleaseCandidate = semver.prerelease(latestVersion) !== null
+  //const isToVersionAReleaseCandidate = semver.prerelease(toVersion) !== null
+  //const isLatestAReleaseCandidate = semver.prerelease(latestVersion) !== null
 
-  return releasedVersions.filter((releasedVersion) => {
+  return releasedVersions
+
+  /*return releasedVersions.filter((releasedVersion) => {
     // Show the release candidates of the latest version
     const isLatestReleaseCandidate =
       showReleaseCandidates &&
@@ -127,12 +129,13 @@ const getReleasedVersionsWithCandidates = ({
           versionToCompare: releasedVersion,
         }))
     )
-  })
+  })*/
 }
 
 const getReleasedVersions = ({ releasedVersions, minVersion, maxVersion }) => {
-  const latestMajorReleaseVersion =
-    getLatestMajorReleaseVersion(releasedVersions)
+  //const latestMajorReleaseVersion =
+  //getLatestMajorReleaseVersion(releasedVersions)
+  const latestMajorReleaseVersion = releasedVersions
 
   const isVersionAReleaseAndOfLatest = (version) =>
     version.includes('rc') &&
@@ -141,9 +144,13 @@ const getReleasedVersions = ({ releasedVersions, minVersion, maxVersion }) => {
   return releasedVersions.filter(
     (releasedVersion) =>
       releasedVersion.length > 0 &&
-      ((maxVersion && semver.lt(releasedVersion, maxVersion)) ||
+      ((maxVersion &&
+        semver.lt(semver.coerce(releasedVersion), semver.coerce(maxVersion))) ||
         (minVersion &&
-          semver.gt(releasedVersion, minVersion) &&
+          semver.gt(
+            semver.coerce(releasedVersion),
+            semver.coerce(minVersion)
+          ) &&
           !isVersionAReleaseAndOfLatest(releasedVersion)))
   )
 }
@@ -152,7 +159,10 @@ const getReleasedVersions = ({ releasedVersions, minVersion, maxVersion }) => {
 const getFirstMajorRelease = ({ releasedVersions, versionToCompare }) =>
   releasedVersions.find(
     (releasedVersion) =>
-      semver.lt(releasedVersion, versionToCompare) &&
+      semver.lt(
+        semver.coerce(releasedVersion),
+        semver.coerce(versionToCompare)
+      ) &&
       semver.diff(
         semver.valid(semver.coerce(releasedVersion)),
         semver.valid(semver.coerce(versionToCompare))
@@ -167,7 +177,9 @@ const doesVersionExist = ({ version, allVersions, minVersion }) => {
       allVersions.includes(version) &&
       // Also compare the version against a `minVersion`, this is used
       // to not allow the user to have a `fromVersion` newer than `toVersion`
-      (!minVersion || (minVersion && semver.gt(version, minVersion)))
+      (!minVersion ||
+        (minVersion &&
+          semver.gt(semver.coerce(version), semver.coerce(minVersion))))
     )
   } catch (_error) {
     return false
